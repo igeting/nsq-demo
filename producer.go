@@ -29,7 +29,7 @@ func main() {
 		return
 	}
 
-	reader := bufio.NewReader(os.Stdin) //从标准输入读取
+	reader := bufio.NewReader(os.Stdin)
 	for {
 		data, err := reader.ReadString('\n')
 		if err != nil {
@@ -37,10 +37,10 @@ func main() {
 			continue
 		}
 		data = strings.TrimSpace(data)
-		if strings.ToUpper(data) == "Q" { //输入Q退出
+		if strings.ToUpper(data) == "Q" {
 			break
 		}
-		// 向 'topic_demo' publish 数据
+
 		err = producer.Publish("topic_demo", []byte(data))
 		if err != nil {
 			fmt.Printf("publish msg to nsq failed, err:%v\n", err)
