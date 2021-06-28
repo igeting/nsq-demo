@@ -10,31 +10,30 @@ import (
 )
 
 // NSQ Consumer Demo
-// MyHandler Class
-type MyHandler struct {
+type Handler struct {
 	Title string
 }
 
-func (m *MyHandler) HandleMessage(msg *nsq.Message) (err error) {
+func (m *Handler) HandleMessage(msg *nsq.Message) (err error) {
 	fmt.Printf("%s recv from %v, msg:%v\n", m.Title, msg.NSQDAddress, string(msg.Body))
-	return
+	return nil
 }
 
 func initConsumer(topic string, channel string, addr string) (err error) {
 	config := nsq.NewConfig()
 	config.LookupdPollInterval = 15 * time.Second
-	c, err := nsq.NewConsumer(topic, channel, config)
+	consumer, err := nsq.NewConsumer(topic, channel, config)
 	if err != nil {
 		fmt.Printf("create consumer failed, err:%v\n", err)
 		return
 	}
-	consumer := &MyHandler{
+	handler := &Handler{
 		Title: "title",
 	}
-	c.AddHandler(consumer)
+	consumer.AddHandler(handler)
 
-	//if err := c.ConnectToNSQD(addr); err != nil {
-	if err := c.ConnectToNSQLookupd(addr); err != nil {
+	//if err := consumer.ConnectToNSQD(addr); err != nil {
+	if err := consumer.ConnectToNSQLookupd(addr); err != nil {
 		return err
 	}
 	return nil
