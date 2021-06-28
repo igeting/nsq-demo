@@ -1,18 +1,23 @@
 # NSQ
 
-## 开三个终端，分别按顺序启动
+## extract nsq and add env
+```
+tar -xvf nsq-1.0.0-compat.linux.tar.gz
+```
+
+## run command
 ```
 nsqlookupd
-nsqd --lookupd-tcp-address=192.168.2.103:4160
-nsqadmin --lookupd-http-address=192.168.2.103:4161
+nsqd --lookupd-tcp-address=127.0.0.1:4160
+nsqadmin --lookupd-http-address=127.0.0.1:4161
 ```
 
-## 访问
+## visit
 ```
-http://192.168.2.103:4171
+http://127.0.0.1:4171
 ```
 
-## 安装客户端
+## install client
 ```
 go get -v -u github.com/nsqio/go-nsq
 ```
