@@ -47,7 +47,8 @@ func main() {
 		fmt.Printf("init consumer failed, err:%v\n", err)
 		return
 	}
-	c := make(chan os.Signal)        //定义一个信号的通道
-	signal.Notify(c, syscall.SIGINT) //转发键盘中断信号到通道
-	<-c                              //阻塞
+
+	c := make(chan os.Signal)
+	signal.Notify(c, syscall.SIGINT)
+	<-c
 }
