@@ -22,14 +22,14 @@ func initProducer(addr string) (err error) {
 }
 
 func main() {
-	nsqAddress := "192.168.2.103:4150"
+	nsqAddress := "127.0.0.1:4150"
 	err := initProducer(nsqAddress)
 	if err != nil {
 		fmt.Printf("init producer failed, err:%v\n", err)
 		return
 	}
 
-	reader := bufio.NewReader(os.Stdin) // 从标准输入读取
+	reader := bufio.NewReader(os.Stdin) //从标准输入读取
 	for {
 		data, err := reader.ReadString('\n')
 		if err != nil {
@@ -37,7 +37,7 @@ func main() {
 			continue
 		}
 		data = strings.TrimSpace(data)
-		if strings.ToUpper(data) == "Q" { // 输入Q退出
+		if strings.ToUpper(data) == "Q" { //输入Q退出
 			break
 		}
 		// 向 'topic_demo' publish 数据

@@ -10,18 +10,16 @@ import (
 )
 
 // NSQ Consumer Demo
-// MyHandler 是一个消费者类型
+// MyHandler Class
 type MyHandler struct {
 	Title string
 }
 
-// HandleMessage 是需要实现的处理消息的方法
 func (m *MyHandler) HandleMessage(msg *nsq.Message) (err error) {
 	fmt.Printf("%s recv from %v, msg:%v\n", m.Title, msg.NSQDAddress, string(msg.Body))
 	return
 }
 
-// 初始化消费者
 func initConsumer(topic string, channel string, addr string) (err error) {
 	config := nsq.NewConfig()
 	config.LookupdPollInterval = 15 * time.Second
@@ -35,8 +33,8 @@ func initConsumer(topic string, channel string, addr string) (err error) {
 	}
 	c.AddHandler(consumer)
 
-	// if err := c.ConnectToNSQD(address); err != nil { // 直接连nsqd
-	if err := c.ConnectToNSQLookupd(addr); err != nil { // 通过lookupd查询
+	//if err := c.ConnectToNSQD(addr); err != nil {
+	if err := c.ConnectToNSQLookupd(addr); err != nil {
 		return err
 	}
 	return nil
@@ -44,13 +42,13 @@ func initConsumer(topic string, channel string, addr string) (err error) {
 }
 
 func main() {
-	topicAddress := "192.168.2.103:4161"
+	topicAddress := "127.0.0.1:4161"
 	err := initConsumer("topic_demo", "first", topicAddress)
 	if err != nil {
 		fmt.Printf("init consumer failed, err:%v\n", err)
 		return
 	}
-	c := make(chan os.Signal)        // 定义一个信号的通道
-	signal.Notify(c, syscall.SIGINT) // 转发键盘中断信号到c
-	<-c                              // 阻塞
+	c := make(chan os.Signal)        //定义一个信号的通道
+	signal.Notify(c, syscall.SIGINT) //转发键盘中断信号到通道
+	<-c                              //阻塞
 }
