@@ -14,7 +14,7 @@ nohup ./nsqadmin -lookupd-http-address=127.0.0.1:4161 > /dev/null 2>&1 &
 
 ## visit
 ```
-http://iopening.cn:4171
+http://127.0.0.1:4171
 ```
 
 ## install client
