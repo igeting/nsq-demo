@@ -42,7 +42,7 @@ func initConsumer(topic string, channel string, addr string) (err error) {
 
 func main() {
 	topicAddress := "127.0.0.1:4161"
-	err := initConsumer("topic_demo", "first", topicAddress)
+	err := initConsumer("test", "first", topicAddress)
 	if err != nil {
 		fmt.Printf("init consumer failed, err:%v\n", err)
 		return

@@ -41,7 +41,7 @@ func main() {
 			break
 		}
 
-		err = producer.Publish("topic_demo", []byte(data))
+		err = producer.Publish("test", []byte(data))
 		if err != nil {
 			fmt.Printf("publish msg to nsq failed, err:%v\n", err)
 			continue
