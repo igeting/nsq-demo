@@ -27,11 +27,11 @@ func init() {
 
 func initConfig() error {
 	viper.AddConfigPath(".")
-	viper.AddConfigPath("configs")
+	viper.AddConfigPath("conf")
 	viper.AddConfigPath("..")
-	viper.AddConfigPath("../configs")
+	viper.AddConfigPath("../conf")
 	viper.AddConfigPath("../..")
-	viper.AddConfigPath("../../configs")
+	viper.AddConfigPath("../../conf")
 	viper.SetConfigName("app")
 
 	err := viper.ReadInConfig()

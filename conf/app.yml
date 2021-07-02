@@ -2,8 +2,8 @@ nsq:
   topic: test
   channel: first
   lookup:
-    host: 127.0.0.1
+    host: iopening.cn
     port: 4161
   nsqd:
-    host: 127.0.0.1
+    host: iopening.cn
     port: 4150
